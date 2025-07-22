@@ -1,14 +1,15 @@
-// routes/movies.js
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const Movie = require("../models/Movie");
+const Movie = require('../models/Movie');
 
-router.get("/", async (req, res) => {
+// POST /api/movies
+router.post('/', async (req, res) => {
   try {
-    const movies = await Movie.find();
-    res.json(movies);
+    const movie = new Movie(req.body);
+    await movie.save();
+    res.status(201).json(movie);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(400).json({ error: err.message });
   }
 });
 

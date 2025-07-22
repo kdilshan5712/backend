@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const authRoutes = require('./routes/auth'); // Make sure this matches your actual file name
+const authRoutes = require('./routes/auth');
+const movieRoutes = require('./routes/movies'); 
+const showtimeRoutes = require('./routes/showtimes');
+
+// ✅ Make sure this path is correct
 
 const app = express();
 
@@ -13,6 +17,8 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/movies', movieRoutes);
+app.use('/api/showtimes', showtimeRoutes); // ✅ This must be present
 
 // MongoDB connection & server start
 mongoose
